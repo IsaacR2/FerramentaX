@@ -11,7 +11,7 @@
 
 	<div class="container" align="center">
 		<h2>Login</h2>
-		<p>Realize o login para acessar a plataforma</p><br>
+		<p>Realize o login para acessar a plataforma NERD POWER</p><br>
 		<form name="form1" action="proc/proc_login.php" method="POST" id="IdForm1">
 			<div class="col-md-4 col-md-offset-4">
 				<label for="usr">E-mail:</label>
