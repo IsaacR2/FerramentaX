@@ -26,20 +26,46 @@
 
   <?php
     require("template.php");
-    require("db/conexao.php");
-    require("db/questoes_db.php");
+    require("db/conexao.php");    
     
-    $materia="";
+    //Filtrar por Matéria
     if (isset($_GET['mat'])) {
+      require("db/questao_has_materia.php");
       $materia = $_GET['mat'];      
       if(isset($_GET['Nf'])){
         $questao = listarQuestaoNaoFeitaPorRegraPorMateria($conn,$materia,$_GET['Nf']);
       }else{
-        $questao = listarQuestaoPorRegraPorMateria($conn,$materia);
+        $questao = listarQuestaoMateria($conn,$materia);
       }
+    //Filtrar por Topico
+    }else if(isset($_GET['top'])){
+      require("db/questao_has_topico.php");
+      $topico = $_GET['top'];      
+      if(isset($_GET['Nf'])){
+        $questao = listarQuestaoNaoFeitaPorRegraPorTopico($conn,$topico,$_GET['Nf']);
+      }else{
+        $questao = listarQuestaoTopico($conn,$topico);
+      }
+    //Filtrar por Assunto
+    }else if(isset($_GET['assu'])){
+      require("db/questao_has_topico.php");
+      $assunto = $_GET['assu'];      
+      if(isset($_GET['Nf'])){
+        $questao = listarQuestaoNaoFeitaPorRegraPorAssunto($conn,$assunto,$_GET['Nf']);
+      }else{
+        $questao = listarQuestaoAssunto($conn,$assunto);
+      }
+    //Sem Filtro, escolhe dentre todas
     }else{
-      $questao = listarQuestaoPorRegra($conn);
-    }
+      require("db/questoes_db2.php");    
+      if(isset($_GET['Nf'])){
+        $questao = listarQuestaoNaoFeitaPorRegra($conn,$_GET['Nf']);
+      }else{
+        $questao = listarQuestaoPorRegra($conn);
+      }
+
+    }    
+   
   ?>
 
 
