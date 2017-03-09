@@ -43,6 +43,23 @@ require("validaSessao.php");
 	require_once("db/materia_db.php");
 	require_once("db/topico_db.php");
 	require_once("db/assunto_db.php");
+	require_once("db/questao_has_assunto.php");
+	require_once("db/questao_has_materia.php");
+	require_once("db/questao_has_topico.php");
+	if (!isset($_GET["IdQuest"])) {
+		echo "<script type='text/javascript'>window.location.href = 'todasQuestoes.php'</script>";
+	}
+	if (!isset($_GET["qtdeTemas"])) {
+		$numMat = NumVincPorQuestaoAssunto($conn, $_GET["IdQuest"]);
+		$numTop = NumVincPorQuestaoMateria($conn, $_GET["IdQuest"]);
+		$numAssu = NumVincPorQuestaoTopico($conn, $_GET["IdQuest"]);
+		$maior = max($numMat,$numTop,$numAssu);
+		$id = $_GET["IdQuest"];
+
+		echo "<script type='text/javascript'>window.location.href = 'cadQuest.php?qtdeTemas=$maior&IdQuest=$id'</script>"
+	}
+
+
 	?>	
 	<div class="container" align="center">
 		<div id="cabecalho" align="left">

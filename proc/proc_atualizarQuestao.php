@@ -1,7 +1,7 @@
 <?php
-//require("../validaSessao.php");
-//echo $_SESSION['sLogin'];
 
+//echo $_SESSION['sLogin'];
+require("../validaSessao.php");
 require("../db/questoes_db.php");
 require("../db/conexao.php");  
 require("../db/estatistica_db.php");     

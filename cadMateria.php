@@ -1,3 +1,7 @@
+<?php
+require("validaSessao.php");
+?>
+
 <!DOCTYPE html>
 <html>
 <head>

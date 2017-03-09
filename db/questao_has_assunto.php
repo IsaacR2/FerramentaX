@@ -37,6 +37,27 @@
 			$sql_exec  = mysqli_query($conexao, $sql_query);		
 			return mysqli_fetch_array($sql_exec);
 		}
+		//Listagem com foco nas matérias
+		function NumVincPorQuestaoAssunto($conexao, $id){
+			$sql_query = "SELECT COUNT(*) FROM `questao_has_assunto` WHERE `questao` = $id";
+			$sql_exec  = mysqli_query($conexao, $sql_query);		
+			return mysqli_fetch_array($sql_exec);
+		}
+
+		function listarTodasAssuntoPorQuestao($conexao, $id){
+			$sql_query = "SELECT * FROM `assunto` WHERE `id` IN (SELECT `assunto` FROM `questao_has_assunto` WHERE `questao` = $id)";
+			$sql_exec  = mysqli_query($conexao, $sql_query);
+			$tabela = array();
+			
+			if ($sql_exec) {
+				while ($linha = mysqli_fetch_array($sql_exec)) {
+					array_push($tabela, $linha);
+				}
+				return $tabela;		
+			}else{
+				return 0;
+			}
+		}
 	
 	//Remoções
 

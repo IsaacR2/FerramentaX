@@ -1,3 +1,7 @@
+<?php
+require("validaSessao.php");
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,12 +11,12 @@
 
 	<?php
 	require("template.php");
-	require("db/topicos_db");
+	require("db/topico_db.php");
 	require ("db/conexao.php");
 	?>
 
 	<div class="container" align="center">
-		<h2>Cadastro de Topico</h2>
+		<h2>Cadastro de Assunto</h2>
 		<form name="form1" action="proc/proc_addAssunto.php" method="POST" id="IdForm1">
 			<div class="col-md-4 col-md-offset-4">
 				<label for="usr">Topico:</label>

@@ -3,7 +3,7 @@
 
 	//Inseres
 
-	function inserirQuestao($conexao, $texto, $resposta, $materia, $coeficiente, $qtde_acertos, $qtde_erros, $status, $dt_ult_resp){
+	function inserirQuestao($conexao, $texto, $resposta, $coeficiente, $qtde_acertos, $qtde_erros, $status, $dt_ult_resp){
 		$sql_query = "INSERT INTO `questoes`(`texto`, `resposta`, `coeficiente`, `qtde_acertos`, `qtde_erros`, `dt_ult_resp`, `status`)  
 		VALUES ('$texto', '$resposta', '$coeficiente', '$qtde_acertos', '$qtde_erros', '$dt_ult_resp', '$status');";
 

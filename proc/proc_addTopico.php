@@ -4,7 +4,7 @@
         require("../db/conexao.php");
                
         $nome = addslashes($_POST['NTopico']);	
-        $nome = $_POST['NMateria'];  	
+        $materia = $_POST['NMateria'];  	
         $status = 1;
 
         if (inserirTopico($conn, $materia, $nome, $status)) {

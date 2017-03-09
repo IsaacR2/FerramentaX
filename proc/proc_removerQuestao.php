@@ -1,8 +1,8 @@
 <?php
-	require("../db/questoes_db.php");
-	require("../db/conexao.php");        
+        require("../validaSessao.php");
+        require("../db/questoes_db2.php");
+        require("../db/conexao.php");        
         $id = addslashes($_POST['Nid']);
-
 
         if(desativarQuestao($conn, $id)){
         	//echo "inseriu";
@@ -11,8 +11,4 @@
         }else{
         	echo "Erro ao desativar";
         }
-
-        //echo "sai";
-	
-
 ?>

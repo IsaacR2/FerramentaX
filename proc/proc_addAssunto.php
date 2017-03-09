@@ -4,10 +4,10 @@
         require("../db/conexao.php");
                
         $nome = addslashes($_POST['NAssunto']);	
-        $nome = $_POST['NTopico'];  	
+        $topico = $_POST['NTopico'];  	
         $status = 1;
 
-        if (inserirTopico($conn, $topico, $nome, $status)) {
+        if (inserirAssunto($conn, $topico, $nome, $status)) {
                 header("Location: ../cadAssunto.php?msg=sucess");   
         }else{
                 echo "Erro ao inserir";

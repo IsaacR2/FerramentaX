@@ -1,3 +1,7 @@
+<?php
+require("validaSessao.php");
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +11,7 @@
 
 	<?php
 	require("template.php");
-	require("db/materia_db");
+	require("db/materia_db.php");
 	require ("db/conexao.php");
 	?>
 
