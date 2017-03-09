@@ -8,6 +8,21 @@
 	}
 
 	//Listagens
+		//Listar tudo
+		function listarTudo($conexao){
+			$sql_query = "SELECT * FROM `questao_has_materia` WHERE 1";
+			$sql_exec  = mysqli_query($conexao, $sql_query);
+			$tabela = array();
+			
+			if ($sql_exec) {
+				while ($linha = mysqli_fetch_array($sql_exec)) {
+					array_push($tabela, $linha);
+				}
+				return $tabela;		
+			}else{
+				return 0;
+			}
+		}
 
 		//Listagem por matéria
 		function listarTodasQuestoesMateria($conexao, $materia){

@@ -15,43 +15,42 @@
   <?php
     require("template.php");
     require("db/conexao.php");
-    require("db/questoes_db.php");
-    $questao = listarTodasQuestoesPorRegra($conn);
+    require("db/questao_has_assunto.php");
+    $assunto = listarTudo($conn);
   ?>
 
 
   <div class="container">
     <?php
       $i=0;
-      foreach ($questao as $linha) {
+      foreach ($assunto as $linha) {
       $i++;
     ?>
 
     <div class="row">
 
-      <div class="well">
+      <div class="well col-md-4 col-md-offset-4">
         <div id="texto">
+        <label>Id da Questão</label>
           <?php
-            echo $linha['texto'];
+            echo $linha['questao'];
           ?>
         </div>
-
-        <br />       
-
-        <div id="resposta">
+        <br />
+        <div id="texto">
+        <label>Id do Assunto</label>
           <?php
-            echo $linha['resposta'];
+            echo $linha['assunto'];
           ?>
         </div>
 
         <br />
 
         <div id="resultado">
-          <form name="form<?php echo $i; ?>";" action="proc/proc_removerQuestao.php" method="POST">            
+          <form name="form<?php echo $i; ?>";" action="proc/proc_removerQuestaoAssunto.php" method="POST">            
             <input type="hidden" name="Nid" value="<?php echo $linha['id'];?>">
-            <button type='submit' class='btn btn-danger col-md-offset-11' align='right'>Remover</button>
-          </form>
-            <a href="altQuest.php?IdQuest=<?php echo $linha['id'];?>;">Alterar Questao</a>
+            <button type='submit' class='btn btn-danger col-md-offset-9' align='right'>Remover</button>
+          </form>            
         </div>      
 
       </div>
