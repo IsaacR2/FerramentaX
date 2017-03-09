@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Tempo de geração: 08/03/2017 às 14:52
+-- Tempo de geração: 09/03/2017 às 13:50
 -- Versão do servidor: 5.7.17-0ubuntu0.16.04.1
 -- Versão do PHP: 7.0.15-0ubuntu0.16.04.4
 
@@ -32,6 +32,59 @@ CREATE TABLE `assunto` (
   `nome_assunto` varchar(255) DEFAULT NULL,
   `status` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Fazendo dump de dados para tabela `assunto`
+--
+
+INSERT INTO `assunto` (`id`, `topico`, `nome_assunto`, `status`) VALUES
+(1, 1, 'Propriedades Logarítmicas', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `estatisticas`
+--
+
+CREATE TABLE `estatisticas` (
+  `id` int(11) NOT NULL,
+  `dt_estat` date DEFAULT NULL,
+  `num_quest_resolv` double DEFAULT NULL,
+  `status` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Fazendo dump de dados para tabela `estatisticas`
+--
+
+INSERT INTO `estatisticas` (`id`, `dt_estat`, `num_quest_resolv`, `status`) VALUES
+(1, '2017-02-05', 15, 1),
+(2, '2017-02-06', 5, 1),
+(3, '2017-02-07', 20, 1),
+(4, '2017-02-08', 27, 1),
+(5, '2017-02-09', 36, 1),
+(6, '2017-02-10', 36, 1),
+(7, '2017-02-13', 1, 1),
+(8, '2017-02-14', 6, 1),
+(9, '2017-02-15', 10, 1),
+(10, '2017-02-16', 10, 1),
+(11, '2017-02-17', 8, 1),
+(12, '2017-02-18', 26, 1),
+(13, '2017-02-19', 6, 1),
+(14, '2017-02-20', 6, 1),
+(15, '2017-02-22', 13, 1),
+(16, '2017-02-23', 35, 1),
+(17, '2017-02-24', 17, 1),
+(18, '2017-02-26', 17, 1),
+(19, '2017-02-27', 18, 1),
+(20, '2017-02-28', 60, 1),
+(21, '2017-03-01', 7, 1),
+(22, '2017-03-02', 42, 1),
+(23, '2017-03-03', 147, 1),
+(24, '2017-03-04', 14, 1),
+(25, '2017-03-05', 1, 1),
+(26, '2017-03-07', 1, 1),
+(27, '2017-03-09', 21, 1);
 
 -- --------------------------------------------------------
 
@@ -74,6 +127,13 @@ CREATE TABLE `questao_has_assunto` (
   `assunto` int(11) NOT NULL,
   `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Fazendo dump de dados para tabela `questao_has_assunto`
+--
+
+INSERT INTO `questao_has_assunto` (`id`, `questao`, `assunto`, `status`) VALUES
+(9, 409, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -439,7 +499,9 @@ INSERT INTO `questao_has_materia` (`id`, `questao`, `materia`, `status`) VALUES
 (1150, 378, 6, 1),
 (1151, 379, 6, 1),
 (1152, 380, 6, 1),
-(1153, 381, 4, 1);
+(1153, 381, 4, 1),
+(1170, 409, 4, 1),
+(1171, 409, 9, 1);
 
 -- --------------------------------------------------------
 
@@ -453,6 +515,14 @@ CREATE TABLE `questao_has_topico` (
   `topico` int(11) NOT NULL,
   `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Fazendo dump de dados para tabela `questao_has_topico`
+--
+
+INSERT INTO `questao_has_topico` (`id`, `questao`, `topico`, `status`) VALUES
+(17, 409, 1, 1),
+(18, 409, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -866,7 +936,7 @@ INSERT INTO `questoes` (`id`, `texto`, `resposta`, `coeficiente`, `qtde_acertos`
 (379, '<p>Um microcomputador dotado de uma CPU suporta multitarefa, passando o controle CPU para os programas em execu&ccedil;&atilde;o e retornando para o sistema operacional ao t&eacute;rmino, num esquema concorrente com a implementa&ccedil;&atilde;o do recurso &ldquo;time slice&rdquo;. Ocorre que, duas situa&ccedil;&otilde;es podem acontecer. Observe.&nbsp;</p>\r\n\r\n<p>I. A fatia de tempo destinada ao programa &eacute; vari&aacute;vel e fica sob controle do programa que est&aacute; sendo executado. Se um programa mal feito tomar para si o controle da CPU e se recusar a devolv&ecirc;-lo por um tempo demasiadamente longo, a impress&atilde;o que se tem &eacute; que os demais programas travaram.&nbsp;</p>\r\n\r\n<p>II. A fatia de tempo fica sob controle do pr&oacute;prio sistema operacional. Independentemente do fato de um dado programa ter ou n&atilde;o terminado o que estava fazendo, esgotada sua &ldquo;fatia de tempo&rdquo;, o sistema operacional retoma o controle da CPU e o repassa para o pr&oacute;ximo da fila.&nbsp;</p>\r\n\r\n<p>Tais formas de multitarefa s&atilde;o denominadas, respectivamente,<br />\r\n&nbsp; a) cooperativa e preemptiva.<br />\r\n&nbsp; b) operacional e preemptiva.<br />\r\n&nbsp; c) operacional e programada.<br />\r\n&nbsp; d) cooperativa e programada.</p>\r\n', '<p>Letra A.</p>\r\n\r\n<p>Multitarefa Cooperativa -&gt; Cada job controla sua propria fatia de tempo, um job pode monopolizar o uso da cpu dando a impress&atilde;o que os demais programas travaram<br />\r\n<br />\r\nPreemp&ccedil;&atilde;o -&gt; caracter&iacute;stica onde o Sistema Operacional pode retirar o receurso do prcesso. Nesse caso preemp&ccedil;&atilde;o por fatia de tempo. Outro tipos de preemp&ccedil;&atilde;o pode ser preemp&ccedil;&atilde;o por prioridade, onde o S.O retira o recurso de um processo com prioridade menor e disponibiliza para um processo com prioridade maior.</p>\r\n', 5, 2, 1, '2017-03-03 19:32:45', 1),
 (380, '<p>No que tange &agrave;s caracter&iacute;sticas, a quantidade de instru&ccedil;&otilde;es que pode ser executada por um microprocessador depende diretamente do clock. Existe uma tecnologia, em que as instru&ccedil;&otilde;es s&atilde;o executadas simultaneamente. Mesmo que o processador leve cinco ciclos de clock para executar cada instru&ccedil;&atilde;o, podem existir cinco instru&ccedil;&otilde;es simult&acirc;neas em diferentes est&aacute;gios de execu&ccedil;&atilde;o. Por esta raz&atilde;o, a impress&atilde;o que se tem &eacute; que cada instru&ccedil;&atilde;o leva um ciclo de clock para ser realizada. Muitos processadores modernos possuem m&uacute;ltiplos decodificadores de instru&ccedil;&atilde;o, que permitem m&uacute;ltiplos canais de execu&ccedil;&atilde;o de instru&ccedil;&otilde;es. Dessa forma, mais de uma instru&ccedil;&atilde;o &eacute; realizada durante cada ciclo de clock. Esta tecnologia &eacute; conhecida por&nbsp;<br />\r\n&nbsp; a) Multiline.<br />\r\n&nbsp; b) Deadline.<br />\r\n&nbsp; c) Pipeline.<br />\r\n&nbsp; d) Hotline.</p>\r\n', '<p>Letra C.</p>\r\n\r\n<p>Um pipeline segue uma sequencia a ser memorizada:&nbsp;&nbsp;<u>BUDEX AGA</u><br />\r\nBusca da instru&ccedil;&atilde;o em mem&oacute;ria<br />\r\nDecodifica&ccedil;&atilde;o da instru&ccedil;&atilde;o<br />\r\nExecu&ccedil;&atilde;o da instru&ccedil;&atilde;o<br />\r\nAcesso a um operando em mem&oacute;ria<br />\r\nGrava&ccedil;&atilde;o da instru&ccedil;&atilde;o</p>\r\n', 5, 2, 1, '2017-03-03 19:34:50', 1),
 (381, '<p><img alt="" src="/ckeditor/kcfinder/upload/images/17155659_900581793417475_1994987945944690432_n.jpg" style="height:329px; width:500px" /></p>\r\n', '<p>pqr=7(p+q+r)<br />\r\npqr &eacute; m&uacute;ltiplo de 7<br />\r\nr=7 arbitrariamente<br />\r\npq=p+q+7<br />\r\npq-p-q+1=8<br />\r\n(p-1)(q-1)=8<br />\r\np-1&gt;=2<br />\r\nLogo,<br />\r\np=3, q=5 arbitrariamente<br />\r\nLogo p+q+r=7+3+5=15</p>\r\n\r\n<p><img alt="" src="/ckeditor/kcfinder/upload/images/17156311_1725949330998199_6089732214577080358_n.jpg" style="height:889px; width:500px" /></p>\r\n', 5, 1, 1, '2017-03-05 16:29:33', 1),
-(382, '<p>sasdasdasdasdasdasd</p>\r\n\r\n<p><img alt="cool" src="http://ferramentax.pe.hu/ckeditor/plugins/smiley/images/shades_smile.png" style="height:23px; width:23px" title="cool" /><img alt="angel" src="http://ferramentax.pe.hu/ckeditor/plugins/smiley/images/angel_smile.png" style="height:23px; width:23px" title="angel" />~<img alt="" src="/ckeditor/kcfinder/upload/images/49d4273a-6d28-4c8c-9912-89f51664eace.jpg" style="height:498px; width:500px" /></p>\r\n\r\n<table border="1" cellpadding="1" cellspacing="1" style="width:500px">\r\n	<tbody>\r\n		<tr>\r\n			<td>&nbsp;</td>\r\n			<td>&nbsp;</td>\r\n		</tr>\r\n		<tr>\r\n			<td>&nbsp;</td>\r\n			<td>&nbsp;</td>\r\n		</tr>\r\n		<tr>\r\n			<td>&nbsp;</td>\r\n			<td>&nbsp;</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<p>&nbsp;</p>\r\n', '<p style="text-align:center">fasdfasdfasdfasdfsdfasdfasdfasf</p>\r\n\r\n<ul>\r\n	<li>fdsadfasdfs</li>\r\n	<li>ddd</li>\r\n	<li>ddd</li>\r\n</ul>\r\n', 10, 1, 1, '2017-03-07 14:26:18', 0);
+(409, '<p>teste</p>\r\n', '<p>teste</p>\r\n', 44, 1, 1, '2017-03-09 15:46:11', 1);
 
 -- --------------------------------------------------------
 
@@ -882,6 +952,33 @@ CREATE TABLE `topico` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+-- Fazendo dump de dados para tabela `topico`
+--
+
+INSERT INTO `topico` (`id`, `materia`, `nome_topico`, `status`) VALUES
+(1, 4, 'Logarítmos', 1),
+(3, 4, 'teste2', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `usuario`
+--
+
+CREATE TABLE `usuario` (
+  `id` int(11) NOT NULL,
+  `email` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `senha` char(32) COLLATE utf8_unicode_ci DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Fazendo dump de dados para tabela `usuario`
+--
+
+INSERT INTO `usuario` (`id`, `email`, `senha`) VALUES
+(1, 'Isaac', '1333e89ed93d4a27a847cd818545690d');
+
+--
 -- Índices de tabelas apagadas
 --
 
@@ -891,6 +988,12 @@ CREATE TABLE `topico` (
 ALTER TABLE `assunto`
   ADD PRIMARY KEY (`id`),
   ADD KEY `topico` (`topico`);
+
+--
+-- Índices de tabela `estatisticas`
+--
+ALTER TABLE `estatisticas`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Índices de tabela `materia`
@@ -936,6 +1039,12 @@ ALTER TABLE `topico`
   ADD KEY `materia` (`materia`);
 
 --
+-- Índices de tabela `usuario`
+--
+ALTER TABLE `usuario`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT de tabelas apagadas
 --
 
@@ -943,7 +1052,12 @@ ALTER TABLE `topico`
 -- AUTO_INCREMENT de tabela `assunto`
 --
 ALTER TABLE `assunto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT de tabela `estatisticas`
+--
+ALTER TABLE `estatisticas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 --
 -- AUTO_INCREMENT de tabela `materia`
 --
@@ -953,27 +1067,32 @@ ALTER TABLE `materia`
 -- AUTO_INCREMENT de tabela `questao_has_assunto`
 --
 ALTER TABLE `questao_has_assunto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT de tabela `questao_has_materia`
 --
 ALTER TABLE `questao_has_materia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1154;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1172;
 --
 -- AUTO_INCREMENT de tabela `questao_has_topico`
 --
 ALTER TABLE `questao_has_topico`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT de tabela `questoes`
 --
 ALTER TABLE `questoes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=383;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=410;
 --
 -- AUTO_INCREMENT de tabela `topico`
 --
 ALTER TABLE `topico`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT de tabela `usuario`
+--
+ALTER TABLE `usuario`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- Restrições para dumps de tabelas
 --

@@ -49,15 +49,46 @@ require("validaSessao.php");
 	if (!isset($_GET["IdQuest"])) {
 		echo "<script type='text/javascript'>window.location.href = 'todasQuestoes.php'</script>";
 	}
-	if (!isset($_GET["qtdeTemas"])) {
-		$numMat = NumVincPorQuestaoAssunto($conn, $_GET["IdQuest"]);
-		$numTop = NumVincPorQuestaoMateria($conn, $_GET["IdQuest"]);
-		$numAssu = NumVincPorQuestaoTopico($conn, $_GET["IdQuest"]);
-		$maior = max($numMat,$numTop,$numAssu);
-		$id = $_GET["IdQuest"];
+	$assuntos = listarTodasAssuntoPorQuestao($conn, $id);
+	$materias = listarTodasMateriaPorQuestao($conn, $id);
+	$topicos = listarTodasTopicoPorQuestao($conn, $id);
+	/*
 
+	$numMat = NumVincPorQuestaoAssunto($conn, $_GET["IdQuest"]);
+	$numTop = NumVincPorQuestaoMateria($conn, $_GET["IdQuest"]);
+	$numAssu = NumVincPorQuestaoTopico($conn, $_GET["IdQuest"]);
+	$maior = max($numMat,$numTop,$numAssu);
+	$id = $_GET["IdQuest"];
+
+	if (!isset($_GET["qtdeTemas"])) {	
 		echo "<script type='text/javascript'>window.location.href = 'cadQuest.php?qtdeTemas=$maior&IdQuest=$id'</script>"
 	}
+
+	$assuntos = listarTodasAssuntoPorQuestao($conn, $id);
+	$materias = listarTodasMateriaPorQuestao($conn, $id);
+	$topicos = listarTodasTopicoPorQuestao($conn, $id);
+	$tabela = array();
+	$i=-1;	
+	foreach ($materias as $linha) {
+		$j=0;
+		$i++;
+		$tabela[$i][$j] = $linha
+		foreach ($topicos as $linha2) {
+			if ($linha2['materia'] == $linha['id']) {
+				$j++;
+				$tabela[$i][$j] = $linha2;
+				foreach ($assunto as $linha3) {
+					if ($linha3['topico'] == $linha2) {
+						# code...
+					}
+				}
+			}
+		}
+	}
+
+	*/
+
+
 
 
 	?>	
@@ -69,7 +100,7 @@ require("validaSessao.php");
 			<div id="comentario" align="left" class="well">
 				<h3>Cadastrar Questão</h3><br />				
 				<form name="formulario1" action="proc/proc_addQuestao.php" method="POST">
-				<h4>Temas</h4><br />			
+				<h4>Temas</h4><br />				
 					<div class="form-inline">					
 						<dir class="form-group">
 							<input type="number" name="NnumTemas" id="numTemas" class="form-control" value="<?php echo (isset($_GET['qtdeTemas'])) ? $_GET['qtdeTemas'] : 1;?>" min="1" step="1" />
@@ -92,8 +123,8 @@ require("validaSessao.php");
 								<select name="NMateria<?php echo $i;?>" class="form-control">
 									<option value="null">Nenhum...</option>
 									<?php
-									$materias = listarTodasMaterias($conn);
-									foreach ($materias as $linha) {
+									$materia = listarTodasMaterias($conn);
+									foreach ($materia as $linha) {
 										$id = $linha['id'];
 										$mat = $linha['nome_materia'];
 										echo "<option value='$id'>$mat</option>"; 
@@ -141,8 +172,8 @@ require("validaSessao.php");
 								<select name="NMateria<?php echo $i;?>" class="form-control">
 									<option value="null">Nenhum...</option>
 									<?php
-									$materias = listarTodasMaterias($conn);
-									foreach ($materias as $linha) {
+									$materia = listarTodasMaterias($conn);
+									foreach ($materia as $linha) {
 										$id = $linha['id'];
 										$mat = $linha['nome_materia'];
 										echo "<option value='$id'>$mat</option>"; 
