@@ -51,7 +51,7 @@
             <input type="hidden" name="Nid" value="<?php echo $linha['id'];?>">
             <button type='submit' class='btn btn-danger col-md-offset-11' align='right'>Remover</button>
           </form>
-            <a href="cadQuest.php?alter=<?php echo $linha['id'];?>;">Alterar Questao</a>
+            <a href="altQuest.php?IdQuest=<?php echo $linha['id'];?>;">Alterar Questao</a>
         </div>      
 
       </div>

@@ -39,7 +39,7 @@ require("validaSessao.php");
 	<?php
 	require("template.php");
 	require("db/conexao.php");
-	require("db/questoes_db.php");
+	require("db/questoes_db2.php");
 	require_once("db/materia_db.php");
 	require_once("db/topico_db.php");
 	require_once("db/assunto_db.php");
@@ -49,9 +49,7 @@ require("validaSessao.php");
 	if (!isset($_GET["IdQuest"])) {
 		echo "<script type='text/javascript'>window.location.href = 'todasQuestoes.php'</script>";
 	}
-	$assuntos = listarTodasAssuntoPorQuestao($conn, $id);
-	$materias = listarTodasMateriaPorQuestao($conn, $id);
-	$topicos = listarTodasTopicoPorQuestao($conn, $id);
+	
 	/*
 
 	$numMat = NumVincPorQuestaoAssunto($conn, $_GET["IdQuest"]);
@@ -88,9 +86,6 @@ require("validaSessao.php");
 
 	*/
 
-
-
-
 	?>	
 	<div class="container" align="center">
 		<div id="cabecalho" align="left">
@@ -101,120 +96,7 @@ require("validaSessao.php");
 				<h3>Cadastrar Questão</h3><br />				
 				<form name="formulario1" action="proc/proc_addQuestao.php" method="POST">
 				<h4>Temas</h4><br />				
-					<div class="form-inline">					
-						<dir class="form-group">
-							<input type="number" name="NnumTemas" id="numTemas" class="form-control" value="<?php echo (isset($_GET['qtdeTemas'])) ? $_GET['qtdeTemas'] : 1;?>" min="1" step="1" />
-						</dir>
-						<div class="form-group">
-							<button type="button" id="altTemas" class="btn btn-default" onclick="teste();">Add</button>
-						</div>
-					</div>
-					<br />		
-					<div id="IdTemas">
-						<?php
-							if (isset($_GET['qtdeTemas'])) {
-								$qtdeTemas = $_GET['qtdeTemas'];
-								//echo "<input type='hidden' name='NumTemas' value='" . $qtdeTemas . "'>";
-								for ($i=1; $i <= $qtdeTemas; $i++) {	
-						?>						
-						<div class="form-inline">
-							<label>Matéria: </label>
-							<div class="form-group">
-								<select name="NMateria<?php echo $i;?>" class="form-control">
-									<option value="null">Nenhum...</option>
-									<?php
-									$materia = listarTodasMaterias($conn);
-									foreach ($materia as $linha) {
-										$id = $linha['id'];
-										$mat = $linha['nome_materia'];
-										echo "<option value='$id'>$mat</option>"; 
-									}
-									?>					    
-								</select> 
-							</div>
-							<label>Topico: </label>
-							<div class="form-group">
-								<select name="NTopico<?php echo $i;?>" class="form-control">
-									<option value="null">Nenhum...</option>
-									<?php
-									$topico = listarTodasTopicos($conn);
-									foreach ($topico as $linha) {
-										$id = $linha['id'];
-										$top = $linha['nome_topico'];
-										echo "<option value='$id'>$top</option>"; 
-									}
-									?>					    
-								</select> 
-							</div>
-							<label>Assunto: </label>
-							<div class="form-group">
-								<select name="NAssunto<?php echo $i;?>" class="form-control">
-									<option value="null">Nenhum...</option>
-									<?php
-									$assunto = listarTodasAssuntos($conn);
-									foreach ($assunto as $linha) {
-										$id = $linha['id'];
-										$assu = $linha['nome_assunto'];
-										echo "<option value='$id'>$assu</option>"; 
-									}
-									?>					    
-								</select> 
-							</div>						
-						</div>
-						<?php
-								}
-							}else{
-						?>
-						<!-- <input type='hidden' name='NumTemas' value='1'> -->
-						<div class="form-inline">
-							<label>Matéria: </label>
-							<div class="form-group">
-								<select name="NMateria<?php echo $i;?>" class="form-control">
-									<option value="null">Nenhum...</option>
-									<?php
-									$materia = listarTodasMaterias($conn);
-									foreach ($materia as $linha) {
-										$id = $linha['id'];
-										$mat = $linha['nome_materia'];
-										echo "<option value='$id'>$mat</option>"; 
-									}
-									?>					    
-								</select> 
-							</div>
-							<label>Topico: </label>
-							<div class="form-group">
-								<select name="NTopico<?php echo $i;?>" class="form-control">
-									<option value="null">Nenhum...</option>
-									<?php
-									$topico = listarTodasTopicos($conn);
-									foreach ($topico as $linha) {
-										$id = $linha['id'];
-										$top = $linha['nome_topico'];
-										echo "<option value='$id'>$top</option>"; 
-									}
-									?>					    
-								</select> 
-							</div>
-							<label>Assunto: </label>
-							<div class="form-group">
-								<select name="NAssunto<?php echo $i;?>" class="form-control">
-									<option value="null">Nenhum...</option>
-									<?php
-									$assunto = listarTodasAssuntos($conn);
-									foreach ($assunto as $linha) {
-										$id = $linha['id'];
-										$assu = $linha['nome_assunto'];
-										echo "<option value='$id'>$assu</option>"; 
-									}
-									?>					    
-								</select> 
-							</div>						
-						</div>
-						<?php
-							}
-						?>
-
-					</div>					
+									
 					<br />
 					<h4>Coeficiente</h4><br />						
 					<input type="number" min="0.01" class="form-control" step="0.01" name="NCoef" placeholder="Digite a matéria para adiciaonar..." required /> <br />	
