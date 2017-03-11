@@ -46,12 +46,14 @@
 			$sql_exec  = mysqli_query($conexao, $sql_query);		
 			return mysqli_fetch_array($sql_exec);
 		}
+
 		//Listar questões não feitas por regra e por materia
 		function listarQuestaoNaoFeitaPorRegraPorMateria($conexao,$materia,$max){
 			$sql_query = "SELECT * FROM `questoes` WHERE `id` IN (SELECT `questao` FROM `questao_has_materia` WHERE `materia` = $materia) AND `status` = 1 AND `qtde_acertos`=$max ORDER BY (`qtde_acertos`/(`qtde_erros` * `coeficiente` * TIMESTAMPDIFF(MINUTE, `dt_ult_resp`, NOW()))) ASC LIMIT 0,1;";
 			$sql_exec  = mysqli_query($conexao, $sql_query);		
 			return mysqli_fetch_array($sql_exec);
 		}
+
 		//Listagem com foco nas matérias
 		function NumVincPorQuestaoMateria($conexao, $id){
 			$sql_query = "SELECT COUNT(*) FROM `questao_has_materia` WHERE `questao` = $id";
@@ -60,7 +62,7 @@
 		}
 
 		function listarTodasMateriaPorQuestao($conexao, $id){
-			$sql_query = "SELECT * FROM `materia` WHERE `id` IN (SELECT `materia` FROM `questao_has_materia` WHERE `questao` = $id)";
+			$sql_query = "SELECT * FROM `materia` WHERE `id` IN (SELECT `materia` FROM `questao_has_materia` WHERE `questao` = '$id')";
 			$sql_exec  = mysqli_query($conexao, $sql_query);
 			$tabela = array();
 			

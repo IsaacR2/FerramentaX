@@ -9,14 +9,18 @@
   <title>Ferramenta X</title>   
 
 </head>
-<body onload="desativarAjax()">
+<body>
 
 
   <?php
     require("template.php");
     require("db/conexao.php");
-    require("db/questao_has_materia.php");
-    $materia = listarTudo($conn);
+    require("db/questao_has_topico.php");
+    if (!isset($_GET["IdQuest"])) {
+      echo "<script type='text/javascript'>window.location.href = 'todasQuestoes.php'</script>";
+    }
+    $id = intval($_GET["IdQuest"]);
+    $topico = listarTodasTopicoPorQuestao($conn, $id);
   ?>
 
   
@@ -24,42 +28,35 @@
   <div class="row">
     <?php
       $i=0;
-      foreach ($materia as $linha) {
-      $i++;
+      //var_dump ($topico);
+      if($topico != 0):
+        foreach ($topico as $linha):
+        $i++;
     ?>
 
     
 
-      <div class="well col-md-4">
+      <div class="well col-md-4">        
         <div id="texto">
-        <label>Id da Questão</label>
+          <label>Topico: </label>
           <?php
-            echo $linha['questao'];
+            echo $linha['nome_topico'];
           ?>
         </div>
         <br />
-        <div id="texto">
-        <label>Id do Materia</label>
-          <?php
-            echo $linha['materia'];
-          ?>
-        </div>
-
-        <br />
-
         <div id="resultado">
-          <form name="form<?php echo $i; ?>";" action="proc/proc_removerQuestaoMateria.php" method="POST">            
+          <form name="form<?php echo $i; ?>";" action="proc/proc_removerQuestaoTopico.php" method="POST">            
             <input type="hidden" name="Nid" value="<?php echo $linha['id'];?>">
             <button type='submit' class='btn btn-danger col-md-offset-9' align='right'>Remover</button>
           </form>            
-        </div>      
-
+        </div>
       </div>
       
     
 
     <?php
-        }
+          endforeach;
+        endif;
     ?>
 </div>
   </div>

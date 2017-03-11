@@ -43,9 +43,6 @@ require("validaSessao.php");
 	require_once("db/materia_db.php");
 	require_once("db/topico_db.php");
 	require_once("db/assunto_db.php");
-	require_once("db/questao_has_assunto.php");
-	require_once("db/questao_has_materia.php");
-	require_once("db/questao_has_topico.php");
 	if (!isset($_GET["IdQuest"])) {
 		echo "<script type='text/javascript'>window.location.href = 'todasQuestoes.php'</script>";
 	}
@@ -98,10 +95,26 @@ require("validaSessao.php");
 			<div id="comentario" align="left" class="col-xs-10 well">
 				<h3>Cadastrar Questão</h3><br />
 				<form name="formulario1" action="proc/proc_alterarQuestao.php" method="POST">
-					<h4>Temas</h4><br />		
-					<a href="">Alterar Materias</a><br />
-					<a href="">Alterar Topicos</a><br />
-					<a href="">Alterar Assuntos</a><br />
+					<h4>Temas</h4><br />
+					<div class="well col-md-4">
+						<table class="table table-condensed">
+							<thead>
+								<tr>
+									<th>Remover</th>
+									<th>Adicionar</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td><a href="removerQuestaoMateria.php?IdQuest=<?php echo  $_GET["IdQuest"]; ?>">Remover Materias</a></td>
+									<td><a href=""> Adicionar Materias</a><br /></td>
+								</tr>
+							</tbody>
+						</table>	
+						
+						<a href="removerQuestaoTopico.php?IdQuest=<?php echo  $_GET["IdQuest"]; ?>">Remover Topicos</a><a href=""> Adicionar Topicos</a><br />
+						<a href="removerQuestaoAssunto.php?IdQuest=<?php echo  $_GET["IdQuest"]; ?>">Remover Assuntos</a><a href=""> Adicionar Assuntos</a><br />
+					</div>
 					<br />
 					<h4>Coeficiente</h4><br />					
 					<input type="number" min="0.01" class="form-control" step="0.01" name="NCoef" placeholder="Digite a matéria para adiciaonar..." value="<?php echo $questao['coeficiente']; ?>" required /> <br />	
