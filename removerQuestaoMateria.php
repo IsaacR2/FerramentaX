@@ -20,8 +20,8 @@
 
   <?php
     require("template.php");
-    require("db/conexao.php");
-    require("db/questao_has_materia.php");
+    require_once("db/conexao.php");
+    require_once("db/questao_has_materia.php");
     require_once("db/materia_db.php");
     if (!isset($_GET["IdQuest"])) {
       echo "<script type='text/javascript'>window.location.href = 'todasQuestoes.php'</script>";

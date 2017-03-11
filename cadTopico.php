@@ -11,8 +11,8 @@ require("validaSessao.php");
 
 	<?php
 	require("template.php");
-	require("db/materia_db.php");
-	require ("db/conexao.php");
+	require_once("db/materia_db.php");
+	require_once("db/conexao.php");
 	?>
 
 	<div class="container" align="center">
@@ -37,7 +37,8 @@ require("validaSessao.php");
 			</div>
 			<br><br><br><br>
 			<div class="col-md-4 col-md-offset-4">    
-				<button type="submit" class="btn btn-primary" name="Enviar">Cadastrar</button>				
+				<button type="submit" class="btn btn-primary" name="Enviar">Cadastrar</button>
+				<button type="button" class="btn btn-default" name="Voltar" onclick="window.location.href='painelAdm.php'">Voltar</button>				
 			</div>				
 		</form>
 	</div>

@@ -40,7 +40,7 @@
 	//Alterção
 
 	function alterarTopico($conexao, $materia, $nome, $id){
-		$sql_query = "UPDATE `topico` SET `materia` = $materia, `nome_topico`=$nome WHERE `id` = '$id';";
+		$sql_query = "UPDATE `topico` SET `materia` = $materia, `nome_topico`='$nome' WHERE `id` = '$id';";
 		return mysqli_query($conexao, $sql_query);
 	}
 ?>

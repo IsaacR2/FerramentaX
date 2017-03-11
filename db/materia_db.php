@@ -40,7 +40,7 @@
 	//Alterção
 
 	function alterarMateria($conexao, $nome, $id){
-		$sql_query = "UPDATE `materia` SET `nome_materia`=$nome WHERE `id` = '$id';";
+		$sql_query = "UPDATE `materia` SET `nome_materia`='$nome' WHERE `id` = '$id';";
 		return mysqli_query($conexao, $sql_query);
 	}
 ?>
