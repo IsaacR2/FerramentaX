@@ -9,6 +9,12 @@
   <title>Ferramenta X</title>   
 
 </head>
+<script type="text/javascript">
+  function voltar() {
+    var idQuestao = document.getElementById('IdQuestao').value;
+    window.location.href = 'altQuest.php?IdQuest=' + idQuestao;
+  }
+</script>
 <body>
 
 
@@ -16,21 +22,23 @@
     require("template.php");
     require("db/conexao.php");
     require("db/questao_has_assunto.php");
+    require_once("db/assunto_db.php");
     if (!isset($_GET["IdQuest"])) {
       echo "<script type='text/javascript'>window.location.href = 'todasQuestoes.php'</script>";
     }
     $id = intval($_GET["IdQuest"]);
-    $assunto = listarTodasAssuntoPorQuestao($conn, $id);
+    $assuntoQuestao = listarTodasQuestaoHasAssuntoPorQuestao($conn, $id);
   ?>
 
   
   <div class="container">
+  <input type="hidden" name="NIdQuestao" id="IdQuestao" value="<?php echo $id;?>">  
+  <button type="button" class="btn btn-default" name="Voltar" onclick="voltar()">Voltar</button>
   <div class="row">
     <?php
       $i=0;
-      //var_dump ($assunto);
-      if($assunto != 0):
-        foreach ($assunto as $linha):
+      if($assuntoQuestao != 0):
+        foreach ($assuntoQuestao as $linha):
         $i++;
     ?>
 
@@ -40,13 +48,15 @@
         <div id="texto">
           <label>Assunto: </label>
           <?php
-            echo $linha['nome_assunto'];
+            $assunto = listarAssuntos($conn, $linha['assunto']);
+            echo $assunto['nome_assunto'];
           ?>
         </div>
         <br />
         <div id="resultado">
           <form name="form<?php echo $i; ?>";" action="proc/proc_removerQuestaoAssunto.php" method="POST">            
             <input type="hidden" name="Nid" value="<?php echo $linha['id'];?>">
+            <input type="hidden" name="NIdQuestao" value="<?php echo $id;?>">
             <button type='submit' class='btn btn-danger col-md-offset-9' align='right'>Remover</button>
           </form>            
         </div>

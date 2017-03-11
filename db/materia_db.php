@@ -14,6 +14,12 @@
 			return 0;
 		}
 	}
+
+	function listarMaterias($conexao, $id){
+		$sql_query = "SELECT * FROM `materia` WHERE `status` = 1 AND `id` = $id";
+		$sql_exec = mysqli_query($conexao, $sql_query);
+		return mysqli_fetch_array($sql_exec);
+	}
 	//Inserção
 	function inserirMateria($conexao, $nome, $status){
 		$sql_query = "INSERT INTO `materia`(`nome_materia`, `status`) VALUES ('$nome', $status)";

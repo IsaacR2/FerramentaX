@@ -93,45 +93,61 @@ require("validaSessao.php");
 		</div>
 		<div class="row">
 			<div id="comentario" align="left" class="col-xs-10 well">
-				<h3>Cadastrar Questão</h3><br />
+				<h3>Alterar Questão</h3><br />
 				<form name="formulario1" action="proc/proc_alterarQuestao.php" method="POST">
 					<h4>Temas</h4><br />
-					<div class="well col-md-4">
-						<table class="table table-condensed">
-							<thead>
-								<tr>
-									<th>Remover</th>
-									<th>Adicionar</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td><a href="removerQuestaoMateria.php?IdQuest=<?php echo  $_GET["IdQuest"]; ?>">Remover Materias</a></td>
-									<td><a href=""> Adicionar Materias</a><br /></td>
-								</tr>
-							</tbody>
-						</table>	
-						
-						<a href="removerQuestaoTopico.php?IdQuest=<?php echo  $_GET["IdQuest"]; ?>">Remover Topicos</a><a href=""> Adicionar Topicos</a><br />
-						<a href="removerQuestaoAssunto.php?IdQuest=<?php echo  $_GET["IdQuest"]; ?>">Remover Assuntos</a><a href=""> Adicionar Assuntos</a><br />
+					<div id="temas" class="col-md-12">
+						<div class="well col-md-4">
+							<table class="table table-condensed">
+								<thead>
+									<tr>
+										<th>Remover</th>
+										<th>Adicionar</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><a href="removerQuestaoMateria.php?IdQuest=<?php echo  $_GET['IdQuest']; ?>">Remover Materias</a></td>
+										<td><a href="addQuestaoMateria.php?IdQuest=<?php echo  $_GET['IdQuest']; ?>"> Adicionar Materias</a><br /></td>
+									</tr>
+									<tr>
+										<td><a href="removerQuestaoTopico.php?IdQuest=<?php echo  $_GET['IdQuest']; ?>">Remover Topicos</a></td>
+										<td><a href="addQuestaoTopico.php?IdQuest=<?php echo  $_GET['IdQuest']; ?>"> Adicionar Topicos</a><br /></td>
+									</tr>
+									<tr>
+										<td><a href="removerQuestaoAssunto.php?IdQuest=<?php echo  $_GET['IdQuest']; ?>">Remover Assuntos</a></td>
+										<td><a href="addQuestaoAssunto.php?IdQuest=<?php echo  $_GET['IdQuest']; ?>"> Adicionar Assuntos</a><br /></td>
+									</tr>
+								</tbody>
+							</table>						
+						</div>
 					</div>
 					<br />
-					<h4>Coeficiente</h4><br />					
-					<input type="number" min="0.01" class="form-control" step="0.01" name="NCoef" placeholder="Digite a matéria para adiciaonar..." value="<?php echo $questao['coeficiente']; ?>" required /> <br />	
-					<h4>Questão</h4><br />					
-					<textarea name="NTexto" id="NTexto" style="resize:none" rows="10"><?php echo $questao['texto']; ?></textarea>
-					<script>
-					  CKEDITOR.replace( 'NTexto' );
-					</script>
+					<div class="col-md-12">					
+						<h4>Coeficiente</h4><br />					
+						<input type="number" min="0.01" class="form-control" step="0.01" name="NCoef" placeholder="Digite a matéria para adiciaonar..." value="<?php echo $questao['coeficiente']; ?>" required />
+					</div>
 					<br />
-					<h4>Resposta</h4><br />	
-					<textarea name="NResp" id="NResp" style="resize:none" rows="5"><?php echo $questao['resposta']; ?></textarea> 
-					<script>
-					  CKEDITOR.replace( 'NResp' );
-					</script>
+					<div class="col-md-12">
+						<h4>Questão</h4><br />					
+						<textarea name="NTexto" id="NTexto" style="resize:none" rows="10"><?php echo $questao['texto']; ?></textarea>
+						<script>
+						  CKEDITOR.replace( 'NTexto' );
+						</script>
+					</div>
 					<br />
-					<input type="hidden" name="Nid" value="<?php echo $questao['id']; ?>">
-					<button class="btn btn-default pull-right" type="submit">Adicionar</button>
+					<div class="col-md-12">
+						<h4>Resposta</h4><br />	
+						<textarea name="NResp" id="NResp" style="resize:none" rows="5"><?php echo $questao['resposta']; ?></textarea> 
+						<script>
+						  CKEDITOR.replace( 'NResp' );
+						</script>
+					</div>
+					<br />
+					<div class="col-md-12">
+						<input type="hidden" name="Nid" value="<?php echo $questao['id']; ?>">
+						<button class="btn btn-default pull-right" type="submit">Adicionar</button>
+					</div>
 				</form>
 			</div> 
 		</div>

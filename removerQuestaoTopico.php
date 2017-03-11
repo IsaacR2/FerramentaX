@@ -9,6 +9,12 @@
   <title>Ferramenta X</title>   
 
 </head>
+<script type="text/javascript">
+  function voltar() {
+    var idQuestao = document.getElementById('IdQuestao').value;
+    window.location.href = 'altQuest.php?IdQuest=' + idQuestao;
+  }
+</script>
 <body>
 
 
@@ -16,21 +22,23 @@
     require("template.php");
     require("db/conexao.php");
     require("db/questao_has_topico.php");
+    require_once("db/topico_db.php");
     if (!isset($_GET["IdQuest"])) {
       echo "<script type='text/javascript'>window.location.href = 'todasQuestoes.php'</script>";
     }
     $id = intval($_GET["IdQuest"]);
-    $topico = listarTodasTopicoPorQuestao($conn, $id);
+    $topicoQuestao = listarTodasQuestaoHasTopicoPorQuestao($conn, $id);
   ?>
 
   
   <div class="container">
+  <input type="hidden" name="NIdQuestao" id="IdQuestao" value="<?php echo $id;?>">  
+  <button type="button" class="btn btn-default" name="Voltar" onclick="voltar()">Voltar</button>
   <div class="row">
     <?php
       $i=0;
-      //var_dump ($topico);
-      if($topico != 0):
-        foreach ($topico as $linha):
+      if($topicoQuestao != 0):
+        foreach ($topicoQuestao as $linha):
         $i++;
     ?>
 
@@ -40,13 +48,15 @@
         <div id="texto">
           <label>Topico: </label>
           <?php
-            echo $linha['nome_topico'];
+            $topico = listarTopicos($conn, $linha['topico']);
+            echo $topico['nome_topico'];
           ?>
         </div>
         <br />
         <div id="resultado">
           <form name="form<?php echo $i; ?>";" action="proc/proc_removerQuestaoTopico.php" method="POST">            
             <input type="hidden" name="Nid" value="<?php echo $linha['id'];?>">
+            <input type="hidden" name="NIdQuestao" value="<?php echo $id;?>">
             <button type='submit' class='btn btn-danger col-md-offset-9' align='right'>Remover</button>
           </form>            
         </div>

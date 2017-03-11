@@ -14,6 +14,12 @@
 			return 0;
 		}
 	}
+
+	function listarTopicos($conexao, $id){
+		$sql_query = "SELECT * FROM `topico` WHERE `status` = 1 AND `id` = $id";
+		$sql_exec = mysqli_query($conexao, $sql_query);
+		return mysqli_fetch_array($sql_exec);
+	}
 	//Inserção
 	function inserirTopico($conexao, $materia,$nome, $status){
 		$sql_query = "INSERT INTO `topico`(`materia`, `nome_topico`, `status`) VALUES ($materia, '$nome', $status)";
