@@ -42,7 +42,7 @@
 
 		//Listar questão por materia e por regra
 		function listarQuestaoMateria($conexao, $materia){
-			$sql_query = "SELECT * FROM `questoes` WHERE `id` IN (SELECT `questao` FROM `questao_has_materia` WHERE `materia` = $materia) AND `status` = 1 ORDER BY (`qtde_acertos`/(`qtde_erros` * `coeficiente` * TIMESTAMPDIFF(MINUTE, `dt_ult_resp`, NOW()))) ASC LIMIT 0,1;";
+			$sql_query = "SELECT * FROM `questoes` WHERE `id` IN (SELECT `questao` FROM `questao_has_materia` WHERE `materia` = $materia AND `questao_has_materia`.`status` = 1) AND `questoes`.`status`=1  ORDER BY (`qtde_acertos`/(`qtde_erros` * `coeficiente` * TIMESTAMPDIFF(SECOND, `dt_ult_resp`, NOW()))) ASC LIMIT 0,1;";
 			$sql_exec  = mysqli_query($conexao, $sql_query);		
 			return mysqli_fetch_array($sql_exec);
 		}

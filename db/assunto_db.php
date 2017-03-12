@@ -15,6 +15,21 @@
 		}
 	}
 
+	function listarAssuntosPorTopico($conexao, $topico){
+		$sql_query = "SELECT * FROM `assunto` WHERE `topico` = '$topico' AND `status` = 1 order by `nome_assunto`;";
+		$sql_exec  = mysqli_query($conexao, $sql_query);
+		$tabela = array();
+		
+		if ($sql_exec) {
+			while ($linha = mysqli_fetch_array($sql_exec)) {
+				array_push($tabela, $linha);
+			}
+			return $tabela;		
+		}else{
+			return 0;
+		}
+	}
+
 	function listarAssuntos($conexao, $id){
 		$sql_query = "SELECT * FROM `assunto` WHERE `status` = 1 AND `id` = $id";
 		$sql_exec = mysqli_query($conexao, $sql_query);

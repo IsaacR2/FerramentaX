@@ -42,7 +42,7 @@
 
 		//Listar questão por assunto e por regra
 		function listarQuestaoAssunto($conexao, $assunto){
-			$sql_query = "SELECT * FROM `questoes` WHERE `id` IN (SELECT `questao` FROM `questao_has_assunto` WHERE `assunto` = $assunto) AND `status` = 1 ORDER BY (`qtde_acertos`/(`qtde_erros` * `coeficiente` * TIMESTAMPDIFF(MINUTE, `dt_ult_resp`, NOW()))) ASC LIMIT 0,1;";
+			$sql_query = "SELECT * FROM `questoes` WHERE `id` IN (SELECT `questao` FROM `questao_has_assunto` WHERE `assunto` = $assunto AND `questao_has_assunto`.`status` = 1) AND `questoes`.`status`=1  ORDER BY (`qtde_acertos`/(`qtde_erros` * `coeficiente` * TIMESTAMPDIFF(SECOND, `dt_ult_resp`, NOW()))) ASC LIMIT 0,1;";
 			$sql_exec  = mysqli_query($conexao, $sql_query);		
 			return mysqli_fetch_array($sql_exec);
 		}

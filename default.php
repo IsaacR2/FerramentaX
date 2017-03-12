@@ -1,5 +1,5 @@
 <?php
-  require("validaSessao.php");
+  require("validaSessao.php");  
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -26,40 +26,51 @@
 
   <?php
     require("template.php");
-    require("db/conexao.php");    
-    
+    require_once("db/conexao.php");
+    $pag = "";
     //Filtrar por Matéria
     if (isset($_GET['mat'])) {
-      require("db/questao_has_materia.php");
-      $materia = $_GET['mat'];      
+      require_once("db/questao_has_materia.php");
+      $materia = $_GET['mat'];
+      $pag = "mat=$materia";
       if(isset($_GET['Nf'])){
-        $questao = listarQuestaoNaoFeitaPorRegraPorMateria($conn,$materia,$_GET['Nf']);
+        $Nf = $_GET['Nf'];
+        $questao = listarQuestaoNaoFeitaPorRegraPorMateria($conn,$materia,$Nf);
+        $pag = "mat=$materia&Nf=$Nf";
       }else{
         $questao = listarQuestaoMateria($conn,$materia);
       }
     //Filtrar por Topico
     }else if(isset($_GET['top'])){
-      require("db/questao_has_topico.php");
-      $topico = $_GET['top'];      
+      require_once("db/questao_has_topico.php");
+      $topico = $_GET['top'];
+      $pag = "top=$topico";
       if(isset($_GET['Nf'])){
-        $questao = listarQuestaoNaoFeitaPorRegraPorTopico($conn,$topico,$_GET['Nf']);
+        $Nf = $_GET['Nf'];
+        $questao = listarQuestaoNaoFeitaPorRegraPorTopico($conn,$topico,$Nf);
+        $pag = "top=$materia&Nf=$Nf";
       }else{
         $questao = listarQuestaoTopico($conn,$topico);
       }
     //Filtrar por Assunto
     }else if(isset($_GET['assu'])){
-      require("db/questao_has_topico.php");
-      $assunto = $_GET['assu'];      
+      require_once("db/questao_has_assunto.php");
+      $assunto = $_GET['assu'];
+      $pag = "assu=$assunto";
       if(isset($_GET['Nf'])){
-        $questao = listarQuestaoNaoFeitaPorRegraPorAssunto($conn,$assunto,$_GET['Nf']);
+        $Nf = $_GET['Nf'];
+        $questao = listarQuestaoNaoFeitaPorRegraPorAssunto($conn,$assunto,$Nf);
+        $pag = "assu=$assunto&Nf=$Nf";
       }else{
         $questao = listarQuestaoAssunto($conn,$assunto);
       }
     //Sem Filtro, escolhe dentre todas
     }else{
-      require("db/questoes_db2.php");    
+      require_once("db/questoes_db2.php");    
       if(isset($_GET['Nf'])){
-        $questao = listarQuestaoNaoFeitaPorRegra($conn,$_GET['Nf']);
+        $Nf = $_GET['Nf'];
+        $questao = listarQuestaoNaoFeitaPorRegra($conn,$Nf);
+        $pag = "Nf=$Nf";
       }else{
         $questao = listarQuestaoPorRegra($conn);
       }
@@ -101,7 +112,7 @@
             <input type="hidden" name="Nid" value="<?php echo $questao['id'];?>">
             <input type="hidden" name="NAcertos" value="<?php echo $questao['qtde_acertos'];?>">
             <input type="hidden" name="NErros" value="<?php echo $questao['qtde_erros'];?>">
-            <input type="hidden" name="NPag" value="<?php echo $materia;?>">
+            <input type="hidden" name="NPag" value="<?php echo $pag;?>">
             <button type='submit' class='btn btn-default col-md-offset-11' align='right'>Próxima</button>
           </form>
         </div>
