@@ -28,6 +28,7 @@
             <tr>
               <th>Id</th>
               <th>Assunto</th>
+              <th>Tópico</th>
               <th>Remover</th>
                   <th>Alterar</th>
             </tr>
@@ -38,6 +39,12 @@
               <tr>
                 <td><?php echo $linha['id']; ?></td>
                 <td><?php echo $linha['nome_assunto']; ?></td>
+                <td>
+                  <?php
+                    $topico = listarTopicos($conn, $linha['topico']);
+                    echo $topico['nome_topico'];
+                  ?>
+                </td>
                 <td>
                           <form name="form<?php echo $i; ?>" method="POST" action="proc/proc_removerAssunto.php" >
                             <input type="hidden" name="NIdAssunto" value="<?php echo $linha['id']; ?>">
