@@ -9,7 +9,7 @@
 
 	//Listagens
 		//Listar tudo
-		function listarTudo($conexao){
+		function listarTudoMateria($conexao){
 			$sql_query = "SELECT * FROM `questao_has_materia` WHERE 1";
 			$sql_exec  = mysqli_query($conexao, $sql_query);
 			$tabela = array();

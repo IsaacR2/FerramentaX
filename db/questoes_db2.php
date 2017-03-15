@@ -19,6 +19,12 @@
 		return mysqli_fetch_array($sql_exec);
 	}
 
+	function listarTextoRespostaQuestao($conexao, $id){
+		$sql_query = "SELECT `texto`, `resposta` FROM `questoes` WHERE `id` = 61";
+		$sql_exec  = mysqli_query($conexao, $sql_query);		
+		return mysqli_fetch_array($sql_exec);
+	}
+
 	function listarTodasQuestoes($conexao){
 		$sql_query = "SELECT * FROM `questoes` WHERE `status` = 1 order by `texto`;";
 		$sql_exec  = mysqli_query($conexao, $sql_query);
