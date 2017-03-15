@@ -35,15 +35,26 @@ require("validaSessao.php");
 				var id = $(this).val();
 				$.ajax({
 					type: "POST",
+<<<<<<< HEAD
 					url: "proc/proc_exibeTopico.php?id="+id,
+=======
+					url: "proc_exibeTopico.php?id="+id,
+>>>>>>> v1.2
 					dataType: "text",
 					success: function(res){
 						$("#NTopico<?php echo $i;?>").children(".topicos").remove();
 						$("#NAssunto<?php echo $i;?>").children(".assuntos").remove();
+<<<<<<< HEAD
 						$("#NTopico<?php echo $i;?>").append(res);		
 					},
 					error: function(){
 						alert("deu ruim");
+=======
+						$("#NTopico<?php echo $i;?>").append(res);
+					},
+					error: function(){
+						alert("Hello! I am an alert box!!");
+>>>>>>> v1.2
 					}
 				});
 			});
@@ -51,7 +62,11 @@ require("validaSessao.php");
 				var id2 = $(this).val();
 				$.ajax({
 					type: "POST",
+<<<<<<< HEAD
 					url: "proc/proc_exibeAssunto.php?id="+id2,
+=======
+					url: "proc_exibeAssunto.php?id="+id2,
+>>>>>>> v1.2
 					dataType: "text",
 					success: function(res){
 						$("#NAssunto<?php echo $i;?>").children(".assuntos").remove();
