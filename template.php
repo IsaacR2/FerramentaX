@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="pt-br">
 <head>
   <meta charset="utf-8" />
@@ -77,15 +76,6 @@
         </ul>
       </div>
     </div>
-  </nav>
-  <script>
-    $(document).ready(function(){
-      $('.dropdown-menu a.test').on("onmouseover", function(e){
-        $(this).next('ul').toggle();
-        e.stopPropagation();
-        e.preventDefault();
-      });
-    });
-  </script>
+  </nav>  
 </body>
 </html>	

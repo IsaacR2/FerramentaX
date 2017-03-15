@@ -1,11 +1,11 @@
 <?php
 require("../validaSessao.php");
-require("../db/questoes_db2.php");
-require("../db/conexao.php");
-require("../db/estatistica_db.php");	
-require("../db/questao_has_materia.php");
-require("../db/questao_has_topico.php");
-require("../db/questao_has_assunto.php");
+require_once("../db/questoes_db2.php");
+require_once("../db/conexao.php");
+require_once("../db/estatistica_db.php");	
+require_once("../db/questao_has_materia.php");
+require_once("../db/questao_has_topico.php");
+require_once("../db/questao_has_assunto.php");
 $status = 1;
 $coeficiente = addslashes($_POST['NCoef']);
 $texto = addslashes($_POST['NTexto']);

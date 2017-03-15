@@ -46,6 +46,10 @@
         <label><h5>Estatísticas</h5></label> 
         <div class="well">
           <button type="button" class="btn btn-primary" onclick="window.location.href='estatisticas.php'">Estatísticas</button>
+        </div>
+        <label><h5>Banco de Dados</h5></label> 
+        <div class="well">
+          <button type="button" class="btn btn-danger" onclick="window.location.href='proc/proc_limparDB.php'">Limpar o Banco</button>
         </div>   
       </div>
     </div>
