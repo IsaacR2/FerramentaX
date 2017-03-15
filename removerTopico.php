@@ -14,6 +14,7 @@
   <?php
     require("template.php");
     require_once("db/topico_db.php");
+    require_once("db/materia_db.php");
     $topicos = listarTodasTopicos($conn);
   ?>
 
@@ -27,7 +28,8 @@
           <thead>
             <tr>
               <th>Id</th>
-              <th>Topico</th>
+              <th>Tópico</th>
+              <th>Materia</th>
               <th>Remover</th>
                   <th>Alterar</th>
             </tr>
@@ -38,6 +40,12 @@
               <tr>
                 <td><?php echo $linha['id']; ?></td>
                 <td><?php echo $linha['nome_topico']; ?></td>
+                <td>
+                  <?php
+                    $materia = listarMaterias($conn, $linha['materia']);
+                    echo $materia['nome_materia'];
+                  ?>
+                </td>
                 <td>
                           <form name="form<?php echo $i; ?>" method="POST" action="proc/proc_removerTopico.php" >
                             <input type="hidden" name="NIdTopico" value="<?php echo $linha['id']; ?>">
